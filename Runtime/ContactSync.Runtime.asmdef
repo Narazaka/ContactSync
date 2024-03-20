@@ -1,0 +1,22 @@
+{
+    "name": "ContactSync.Runtime",
+    "references": [
+        "VRC.SDKBase",
+        "AvatarParametersDriver.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "net.narazaka.vrchat.avatar-parameters-driver",
+            "expression": "1.1.0",
+            "define": "NET_NARAZAKA_VRCHAT_ContactSync_AvatarParametersDriver"
+        }
+    ],
+    "noEngineReferences": false
+}
