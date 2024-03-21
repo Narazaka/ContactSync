@@ -16,7 +16,7 @@ namespace net.narazaka.vrchat.contact_sync.editor
             var receiverType = property.FindPropertyRelative(nameof(Tag.ReceiverType));
             var minVelocity = property.FindPropertyRelative(nameof(Tag.MinVelocity));
             var memo = property.FindPropertyRelative(nameof(Tag.Memo));
-            var role = property.FindPropertyRelative(nameof(Tag.Role));
+            var sendBy = property.FindPropertyRelative(nameof(Tag.SendBy));
             var markExist = property.FindPropertyRelative(nameof(Tag.MarkExist));
             var continuous = property.FindPropertyRelative(nameof(Tag.Continuous));
             var separated = property.FindPropertyRelative(nameof(Tag.Separated));
@@ -37,13 +37,13 @@ namespace net.narazaka.vrchat.contact_sync.editor
             rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             rect.height = EditorGUIUtility.singleLineHeight;
 
-            rect.width = 115;
-            EditorGUIUtility.labelWidth = 25;
-            EditorGUI.PropertyField(rect, role);
+            rect.width = 140;
+            EditorGUIUtility.labelWidth = 50;
+            EditorGUI.PropertyField(rect, sendBy);
             EditorGUIUtility.labelWidth = 0;
 
             rect.x += rect.width + 2;
-            rect.width = position.width - 117;
+            rect.width = position.width - 142;
             EditorGUIUtility.labelWidth = 35;
             EditorGUI.PropertyField(rect, memo);
             EditorGUIUtility.labelWidth = 0;

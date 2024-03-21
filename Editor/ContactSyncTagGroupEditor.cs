@@ -23,6 +23,18 @@ namespace net.narazaka.vrchat.contact_sync.editor
             TagsList.drawHeaderCallback = (Rect rect) => EditorGUI.LabelField(rect, "Tags");
             TagsList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) => EditorGUI.PropertyField(rect, Tags.GetArrayElementAtIndex(index));
             TagsList.elementHeightCallback = (int index) => EditorGUI.GetPropertyHeight(Tags.GetArrayElementAtIndex(index));
+            TagsList.onAddCallback = (ReorderableList list) =>
+            {
+                Tags.arraySize++;
+                if (Tags.arraySize == 1)
+                {
+                    var tag = Tags.GetArrayElementAtIndex(0);
+                    tag.FindPropertyRelative(nameof(Tag.ReceiverType)).enumValueIndex = 4;
+                    tag.FindPropertyRelative(nameof(Tag.MarkExist)).boolValue = true;
+                    tag.FindPropertyRelative(nameof(Tag.Continuous)).boolValue = true;
+                    tag.FindPropertyRelative(nameof(Tag.Separated)).boolValue = false;
+                }
+            };
 #endif
         }
 

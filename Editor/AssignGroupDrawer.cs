@@ -214,9 +214,16 @@ namespace net.narazaka.vrchat.contact_sync.editor
         {
             if (contactSyncTagGroup?.Tags == null) return new Dictionary<string, TagRole>();
             if (TagTypesCache.TryGetValue(contactSyncTagGroup, out var tagTypes) && !forceUpdate) return tagTypes;
-            tagTypes = contactSyncTagGroup.Tags.ToDictionary(t => t.Name, t => t.Role);
+            tagTypes = contactSyncTagGroup.Tags.Distinct(new TagNameComparer()).ToDictionary(t => t.Name, t => t.SendBy);
             TagTypesCache[contactSyncTagGroup] = tagTypes;
             return tagTypes;
+        }
+
+        class TagNameComparer : IEqualityComparer<Tag>
+        {
+            public bool Equals(Tag x, Tag y) => x.Name == y.Name;
+
+            public int GetHashCode(Tag obj) => obj.Name.GetHashCode();
         }
     }
 }
