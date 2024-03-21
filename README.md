@@ -10,7 +10,7 @@ Sync avatar parameters with contacts
 
 1. https://vpm.narazaka.net/ から「Add to VCC」ボタンを押してリポジトリをVCCにインストールします。
 2. VCCでSettings→Packages→Installed Repositoriesの一覧中で「Narazaka VPM Listing」にチェックが付いていることを確認します。
-3. アバタープロジェクトの「Manage Project」から「Floor Adjuster」をインストールします。
+3. アバタープロジェクトの「Manage Project」から「Contact Sync」をインストールします。
 
 ## 使い方
 

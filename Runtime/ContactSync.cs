@@ -13,8 +13,6 @@ namespace net.narazaka.vrchat.contact_sync
 #endif
     {
         [SerializeField]
-        public ContactSyncTagGroup[] TagGroups;
-        [SerializeField]
         public AssignGroup[] AssignGroups;
 
         public IEnumerable<VRCExpressionParameters.Parameter> GetParameterNameAndTypes()
@@ -25,7 +23,7 @@ namespace net.narazaka.vrchat.contact_sync
                 var tagGroup = assignGroup.ContactSyncTagGroup;
                 if (tagGroup == null) continue;
                 var tags = tagGroup.Tags.ToDictionary(t => t.Name);
-                foreach (var assign in assignGroup.Assigns)
+                foreach (var assign in assignGroup.CommanderAssigns.Concat(assignGroup.FollowerAssigns))
                 {
                     if (!tags.TryGetValue(assign.Name, out var tag)) continue;
                     parameters.Add(new VRCExpressionParameters.Parameter

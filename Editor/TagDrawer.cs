@@ -25,7 +25,7 @@ namespace net.narazaka.vrchat.contact_sync.editor
             rect.height = EditorGUIUtility.singleLineHeight;
 
             rect.width -= 77;
-            EditorGUIUtility.labelWidth = 40;
+            EditorGUIUtility.labelWidth = 65;
             EditorGUI.PropertyField(rect, name, label.text == name.stringValue ? new GUIContent("Tag") : label);
             EditorGUIUtility.labelWidth = 0;
 
