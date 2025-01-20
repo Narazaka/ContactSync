@@ -2,10 +2,10 @@
 using UnityEditor;
 using UnityEditorInternal;
 
-namespace net.narazaka.vrchat.contact_sync.editor
+namespace Narazaka.VRChat.ContactSync.Editor
 {
     [CustomEditor(typeof(ContactSyncTagGroup))]
-    public class ContactSyncTagGroupEditor : Editor
+    public class ContactSyncTagGroupEditor : UnityEditor.Editor
     {
         SerializedProperty Name;
         SerializedProperty Tags;

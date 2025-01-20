@@ -1,8 +1,9 @@
 {
-    "name": "ContactSync.Editor",
+    "name": "Narazaka.VRChat.ContactSync.Editor",
+    "rootNamespace": "",
     "references": [
-        "ContactSync.Runtime",
-        "nadena.dev.ndmf"
+        "nadena.dev.ndmf",
+        "Narazaka.VRChat.ContactSync.Runtime"
     ],
     "includePlatforms": [
         "Editor"

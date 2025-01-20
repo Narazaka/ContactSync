@@ -2,10 +2,10 @@
 using UnityEditor;
 using UnityEditorInternal;
 
-namespace net.narazaka.vrchat.contact_sync.editor
+namespace Narazaka.VRChat.ContactSync.Editor
 {
     [CustomEditor(typeof(ContactSync))]
-    public class ContactSyncEditor : Editor
+    public class ContactSyncEditor : UnityEditor.Editor
     {
         SerializedProperty AssignGroups;
         ReorderableList AssignGroupsList;

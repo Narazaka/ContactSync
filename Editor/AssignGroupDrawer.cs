@@ -4,7 +4,7 @@ using UnityEditorInternal;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace net.narazaka.vrchat.contact_sync.editor
+namespace Narazaka.VRChat.ContactSync.Editor
 {
     [CustomPropertyDrawer(typeof(AssignGroup))]
     class AssignGroupDrawer : PropertyDrawer
@@ -61,7 +61,7 @@ namespace net.narazaka.vrchat.contact_sync.editor
             {
                 if (!ContactSyncTagGroupEditorCache.TryGetValue(contactSyncTagGroupObject, out var contactSyncTagGroupEditor))
                 {
-                    ContactSyncTagGroupEditorCache[contactSyncTagGroupObject] = contactSyncTagGroupEditor = Editor.CreateEditor(contactSyncTagGroupObject) as ContactSyncTagGroupEditor;
+                    ContactSyncTagGroupEditorCache[contactSyncTagGroupObject] = contactSyncTagGroupEditor = UnityEditor.Editor.CreateEditor(contactSyncTagGroupObject) as ContactSyncTagGroupEditor;
                 }
                 editorHeight = contactSyncTagGroupEditor.GetHeight();
                 rect = position;
@@ -120,7 +120,7 @@ namespace net.narazaka.vrchat.contact_sync.editor
                 {
                     if (!ContactSyncTagGroupEditorCache.TryGetValue(contactSyncTagGroupObject, out var contactSyncTagGroupEditor))
                     {
-                        ContactSyncTagGroupEditorCache[contactSyncTagGroupObject] = contactSyncTagGroupEditor = Editor.CreateEditor(contactSyncTagGroupObject) as ContactSyncTagGroupEditor;
+                        ContactSyncTagGroupEditorCache[contactSyncTagGroupObject] = contactSyncTagGroupEditor = UnityEditor.Editor.CreateEditor(contactSyncTagGroupObject) as ContactSyncTagGroupEditor;
                     }
                     height += contactSyncTagGroupEditor.GetHeight();
                 }

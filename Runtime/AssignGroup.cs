@@ -1,6 +1,6 @@
 using System;
 
-namespace net.narazaka.vrchat.contact_sync
+namespace Narazaka.VRChat.ContactSync
 {
     [Serializable]
     public class AssignGroup

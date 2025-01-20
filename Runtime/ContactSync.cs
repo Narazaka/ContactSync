@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDK3.Avatars.ScriptableObjects;
 using VRC.SDKBase;
 
-namespace net.narazaka.vrchat.contact_sync
+namespace Narazaka.VRChat.ContactSync
 {
 #if NET_NARAZAKA_VRCHAT_ContactSync_AvatarParametersDriver
     public class ContactSync : MonoBehaviour, IEditorOnly, net.narazaka.vrchat.avatar_parameters_driver.IParameterNameAndTypesProvider

@@ -1,4 +1,4 @@
-﻿namespace net.narazaka.vrchat.contact_sync
+﻿namespace Narazaka.VRChat.ContactSync
 {
     public enum ContactSyncReceiverType
     {
@@ -6,7 +6,7 @@
         OnEnter,
         Proximity,
         Trigger,
-        OnOff,
+        Toggle,
         Choose,
         Radial,
     }

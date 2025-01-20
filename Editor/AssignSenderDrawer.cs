@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace net.narazaka.vrchat.contact_sync.editor
+namespace Narazaka.VRChat.ContactSync.Editor
 {
     class AssignSenderDrawer : AssignDrawerBase
     {

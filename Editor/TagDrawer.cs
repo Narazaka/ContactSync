@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace net.narazaka.vrchat.contact_sync.editor
+namespace Narazaka.VRChat.ContactSync.Editor
 {
     [CustomPropertyDrawer(typeof(Tag))]
     class TagDrawer : PropertyDrawer
@@ -17,9 +17,9 @@ namespace net.narazaka.vrchat.contact_sync.editor
             var minVelocity = property.FindPropertyRelative(nameof(Tag.MinVelocity));
             var memo = property.FindPropertyRelative(nameof(Tag.Memo));
             var sendBy = property.FindPropertyRelative(nameof(Tag.SendBy));
-            var markExist = property.FindPropertyRelative(nameof(Tag.MarkExist));
-            var continuous = property.FindPropertyRelative(nameof(Tag.Continuous));
-            var separated = property.FindPropertyRelative(nameof(Tag.Separated));
+            var notifyExists = property.FindPropertyRelative(nameof(Tag.NotifyExists));
+            var locked = property.FindPropertyRelative(nameof(Tag.Locked));
+            var allowUnconstrained = property.FindPropertyRelative(nameof(Tag.AllowUnconstrained));
 
             var rect = position;
             rect.height = EditorGUIUtility.singleLineHeight;
@@ -63,7 +63,7 @@ namespace net.narazaka.vrchat.contact_sync.editor
             {
                 rect.width = 77;
                 EditorGUIUtility.labelWidth = 60;
-                EditorGUI.PropertyField(rect, markExist);
+                EditorGUI.PropertyField(rect, notifyExists);
                 EditorGUIUtility.labelWidth = 0;
 
                 if (receiverType.enumValueIndex >= 4) // OnOff-
@@ -71,7 +71,7 @@ namespace net.narazaka.vrchat.contact_sync.editor
                     rect.x += rect.width + 2;
                     rect.width = 82;
                     EditorGUIUtility.labelWidth = 65;
-                    EditorGUI.PropertyField(rect, continuous);
+                    EditorGUI.PropertyField(rect, locked);
                     EditorGUIUtility.labelWidth = 0;
                 }
                 if (receiverType.enumValueIndex == 4) // OnOff
@@ -79,7 +79,7 @@ namespace net.narazaka.vrchat.contact_sync.editor
                     rect.x += rect.width + 2;
                     rect.width = 77;
                     EditorGUIUtility.labelWidth = 60;
-                    EditorGUI.PropertyField(rect, separated);
+                    EditorGUI.PropertyField(rect, allowUnconstrained);
                     EditorGUIUtility.labelWidth = 0;
                 }
             }

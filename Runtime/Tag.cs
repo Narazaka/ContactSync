@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace net.narazaka.vrchat.contact_sync
+namespace Narazaka.VRChat.ContactSync
 {
     [Serializable]
     public class Tag
@@ -9,14 +9,14 @@ namespace net.narazaka.vrchat.contact_sync
         [Tooltip("Tag base name")]
         public string Name;
         [Tooltip("Receiver type")]
-        public ContactSyncReceiverType ReceiverType = ContactSyncReceiverType.OnOff;
+        public ContactSyncReceiverType ReceiverType = ContactSyncReceiverType.Toggle;
         public float MinVelocity = 0.05f;
         [Tooltip("Memo (does not affect runtime)")]
         public string Memo;
         [Tooltip("Send by")]
         public TagRole SendBy;
-        public bool MarkExist = true;
-        public bool Continuous = true; // Driverが一発か拘束するか
-        public bool Separated = false; // ON/OFFを3値にするか
+        public bool NotifyExists = true;
+        public bool Locked = true; // Driverが一発か拘束するか
+        public bool AllowUnconstrained = true; // 無指定状態があるかどうか
     }
 }

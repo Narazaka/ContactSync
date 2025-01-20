@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace net.narazaka.vrchat.contact_sync
+namespace Narazaka.VRChat.ContactSync
 {
     [CreateAssetMenu(menuName = "Contact Sync/Tag Group")]
     public class ContactSyncTagGroup : ScriptableObject
