@@ -3,7 +3,7 @@
     "rootNamespace": "",
     "references": [
         "nadena.dev.ndmf",
-        "Narazaka.VRChat.ContactSync.Runtime"
+        "Narazaka.VRChat.ContactSync"
     ],
     "includePlatforms": [
         "Editor"
