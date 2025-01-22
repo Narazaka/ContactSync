@@ -1,10 +1,10 @@
-﻿namespace Narazaka.VRChat.ContactSync
+namespace Narazaka.VRChat.ContactSync
 {
     public enum TagRole
     {
         // 指示者
-        Commander,
+        A,
         // 従属者
-        Follower,
+        B,
     }
 }

@@ -6,11 +6,7 @@ using VRC.SDKBase;
 
 namespace Narazaka.VRChat.ContactSync
 {
-#if NET_NARAZAKA_VRCHAT_ContactSync_AvatarParametersDriver
-    public class ContactSync : MonoBehaviour, IEditorOnly, net.narazaka.vrchat.avatar_parameters_driver.IParameterNameAndTypesProvider
-#else
     public class ContactSync : MonoBehaviour, IEditorOnly
-#endif
     {
         [SerializeField]
         public AssignGroup[] AssignGroups;

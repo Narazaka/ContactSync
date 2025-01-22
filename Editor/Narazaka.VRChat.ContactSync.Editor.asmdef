@@ -2,8 +2,13 @@
     "name": "Narazaka.VRChat.ContactSync.Editor",
     "rootNamespace": "",
     "references": [
+        "VRC.SDKBase",
+        "Narazaka.VRChat.ContactSync",
         "nadena.dev.ndmf",
-        "Narazaka.VRChat.ContactSync"
+        "nadena.dev.ndmf.vrchat",
+        "nadena.dev.modular-avatar.core",
+        "Narazaka.VRChat.AvatarParametersUtil",
+        "Narazaka.VRChat.AvatarParametersUtil.Editor"
     ],
     "includePlatforms": [
         "Editor"

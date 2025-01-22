@@ -40,7 +40,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
                     var path = EditorUtility.SaveFilePanelInProject("Create ContactSyncTagGroup", System.IO.Path.GetFileNameWithoutExtension(defaultPath), "asset", "", "Assets/ContactSyncTagGroups");
                     if (string.IsNullOrEmpty(path)) return;
                     var asset = ScriptableObject.CreateInstance<ContactSyncTagGroup>();
-                    asset.Prefix = GUID.Generate().ToString();
+                    asset.Name = GUID.Generate().ToString();
                     EditorUtility.SetDirty(asset);
                     AssetDatabase.CreateAsset(asset, path);
                     AssetDatabase.SaveAssets();
@@ -155,7 +155,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
                     EditorGUI.LabelField(rect, $"Element {index} [{name}] is not found in {contactSyncTagGroup.name}");
                     return;
                 }
-                PropertyDrawer drawer = isCommander == (tagType == TagRole.Commander) ? (PropertyDrawer)new AssignSenderDrawer() : new AssignReceiverDrawer();
+                PropertyDrawer drawer = isCommander == (tagType == TagRole.A) ? (PropertyDrawer)new AssignSenderDrawer() : new AssignReceiverDrawer();
                 drawer.OnGUI(rect, element, new GUIContent($"Element {index}"));
             };
             assignsList.elementHeightCallback = (index) =>
@@ -167,7 +167,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
                 {
                     return EditorGUIUtility.singleLineHeight;
                 }
-                PropertyDrawer drawer = isCommander == (tagType == TagRole.Commander) ? (PropertyDrawer)new AssignSenderDrawer() : new AssignReceiverDrawer();
+                PropertyDrawer drawer = isCommander == (tagType == TagRole.A) ? (PropertyDrawer)new AssignSenderDrawer() : new AssignReceiverDrawer();
                 return drawer.GetPropertyHeight(element, new GUIContent($"Element {index}"));
             };
             assignsListCache[(contactSyncTagGroup, property.propertyPath)] = assignsList;
@@ -214,7 +214,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
         {
             if (contactSyncTagGroup?.Tags == null) return new Dictionary<string, TagRole>();
             if (TagTypesCache.TryGetValue(contactSyncTagGroup, out var tagTypes) && !forceUpdate) return tagTypes;
-            tagTypes = contactSyncTagGroup.Tags.Distinct(new TagNameComparer()).ToDictionary(t => t.Name, t => t.SendBy);
+            tagTypes = contactSyncTagGroup.Tags.Distinct(new TagNameComparer()).ToDictionary(t => t.Name, t => t.Sender);
             TagTypesCache[contactSyncTagGroup] = tagTypes;
             return tagTypes;
         }

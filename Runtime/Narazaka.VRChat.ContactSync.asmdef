@@ -3,7 +3,9 @@
     "rootNamespace": "",
     "references": [
         "VRC.SDKBase",
-        "AvatarParametersDriver.Runtime"
+        "AvatarParametersDriver.Runtime",
+        "nadena.dev.ndmf",
+        "nadena.dev.modular-avatar.core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -12,12 +14,6 @@
     "precompiledReferences": [],
     "autoReferenced": false,
     "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "net.narazaka.vrchat.avatar-parameters-driver",
-            "expression": "1.1.0",
-            "define": "NET_NARAZAKA_VRCHAT_ContactSync_AvatarParametersDriver"
-        }
-    ],
+    "versionDefines": [],
     "noEngineReferences": false
 }

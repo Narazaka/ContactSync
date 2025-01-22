@@ -10,7 +10,9 @@
   "license": "Zlib",
   "type": "tool",
   "url" : "https://github.com/Narazaka/ContactSync.git",
+  "unity": "2022.3",
   "vpmDependencies": {
-    "nadena.dev.ndmf": ">=1.1.1 <2.0.0-a"
+    "nadena.dev.modular-avatar": ">=1.10.0 <2.0.0-a",
+    "net.narazaka.vrchat.avatar-parameters-util": ">=2.1.3 <3.0.0-a"
   }
 }
