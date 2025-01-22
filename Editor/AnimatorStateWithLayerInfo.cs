@@ -34,6 +34,13 @@ namespace Narazaka.VRChat.ContactSync.Editor
             return this;
         }
 
+        public AnimatorStateWithLayerInfo TimeParameter(string parameter)
+        {
+            State.timeParameter = parameter;
+            State.timeParameterActive = true;
+            return this;
+        }
+
         public AnimatorStateWithLayerInfo Motion(Motion motion)
         {
             State.motion = motion;

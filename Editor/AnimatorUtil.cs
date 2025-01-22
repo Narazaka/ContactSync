@@ -53,6 +53,11 @@ namespace Narazaka.VRChat.ContactSync.Editor
         public static T IfNot<T>(this T transition, string parameter) where T : AnimatorTransitionBase => transition
             .AddCondition(new AnimatorCondition { mode = AnimatorConditionMode.IfNot, threshold = 0, parameter = parameter });
 
+        public static T Equal<T>(this T transition, string parameter, float threshold) where T : AnimatorTransitionBase => transition
+            .AddCondition(new AnimatorCondition { mode = AnimatorConditionMode.Equals, threshold = threshold, parameter = parameter });
+        public static T NotEqual<T>(this T transition, string parameter, float threshold) where T : AnimatorTransitionBase => transition
+            .AddCondition(new AnimatorCondition { mode = AnimatorConditionMode.NotEqual, threshold = threshold, parameter = parameter });
+
         public static T Greater<T>(this T transition, string parameter, float threshold) where T : AnimatorTransitionBase => transition
             .AddCondition(new AnimatorCondition { mode = AnimatorConditionMode.Greater, threshold = threshold, parameter = parameter });
         public static T Less<T>(this T transition, string parameter, float threshold) where T : AnimatorTransitionBase => transition

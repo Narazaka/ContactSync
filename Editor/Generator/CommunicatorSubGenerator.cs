@@ -20,7 +20,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             TagIndex = System.Array.IndexOf(Tags, Tag);
         }
 
-        protected const float FloatPrecision = 1 / 255f;
         protected Vector3 TagLocalPositionBase => Vector3.down * TagIndex * 3;
         protected string CollisionTag => Component.EffectiveTagBase(TagGroup);
         protected List<string> CollisionTags => new List<string> { CollisionTag };

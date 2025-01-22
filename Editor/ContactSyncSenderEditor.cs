@@ -83,7 +83,10 @@ namespace Narazaka.VRChat.ContactSync.Editor
                     }
                 }
                 DrawDefaultValue(receiverType);
-                EditorGUILayout.PropertyField(Saved, T.Saved.GUIContent);
+                if (receiverType != ContactSyncReceiverType.Trigger)
+                {
+                    EditorGUILayout.PropertyField(Saved, T.Saved.GUIContent);
+                }
                 DrawMenus(receiverType);
             }
 

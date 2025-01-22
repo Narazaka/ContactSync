@@ -1,4 +1,5 @@
 using nadena.dev.modular_avatar.core;
+using Narazaka.VRChat.ContactSync.Editor.Generator.Sender;
 using Narazaka.VRChat.ContactSync.Editor.NameProvider;
 using Narazaka.VRChat.ContactSync.Editor.ParameterProvider;
 using UnityEngine;
@@ -17,8 +18,17 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         {
             switch (Tag.ReceiverType)
             {
+                case ContactSyncReceiverType.Trigger:
+                    GetSubGenerator<TriggerGenerator>().Generate();
+                    break;
                 case ContactSyncReceiverType.Toggle:
                     GetSubGenerator<ToggleGenerator>().Generate();
+                    break;
+                case ContactSyncReceiverType.Choose:
+                    GetSubGenerator<ChooseGenerator>().Generate();
+                    break;
+                case ContactSyncReceiverType.Radial:
+                    GetSubGenerator<RadialGenerator>().Generate();
                     break;
             }
         }
@@ -128,6 +138,26 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             }
         }
 
+        class TriggerGenerator : SubReceiverGenerator
+        {
+            public TriggerGenerator(ContactSyncGenerator gen, ContactSyncReceiver com) : base(gen, com)
+            {
+            }
+
+            protected override GameObject GenerateContact()
+            {
+                var contact = GenerateBaseContact(Name(nameof(Contact)));
+                contact.receiverType = ContactReceiver.ReceiverType.Constant;
+                contact.parameter = Component.ParameterName;
+                contact.gameObject.SetActive(false);
+                return contact.gameObject;
+            }
+
+            protected override void GenerateAnimator()
+            {
+            }
+        }
+
         class ToggleGenerator : SubReceiverGenerator
         {
             public ToggleGenerator(ContactSyncGenerator gen, ContactSyncReceiver com) : base(gen, com)
@@ -136,7 +166,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
 
             protected override void GenerateAnimator()
             {
-                var layer = Controller.AddNewLayer(Name("Contact"));
+                var layer = Controller.AddNewLayer(Name(nameof(Contact)));
                 layer.EntryPosition(-300, 200);
                 layer.ExitPosition(300, 200);
                 var idleState = layer.AddNewState("Idle").Position(0, 100);
@@ -144,8 +174,8 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
                 var onState = layer.AddNewState("On").Position(0, 300).AddParameterDriver(Set(true));
                 layer.DefaultState(idleState);
                 // layer.AddEntryTransition(idleState).Less(ParameterName.Contact, FloatPrecision);
-                idleState.AddExitTransition().Greater(ParameterName.Contact, FloatPrecision);
-                layer.AddEntryTransition(offState).Greater(ParameterName.Contact, FloatPrecision).Less(ParameterName.Contact, 0.5f);
+                idleState.AddExitTransition().Greater(ParameterName.Contact, Constant.FloatPrecision);
+                layer.AddEntryTransition(offState).Greater(ParameterName.Contact, Constant.FloatPrecision).Less(ParameterName.Contact, 0.5f);
                 offState.AddExitTransition().AutoExit();
                 layer.AddEntryTransition(onState).Greater(ParameterName.Contact, 0.5f);
                 onState.AddExitTransition().AutoExit();
@@ -156,6 +186,72 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
                 type = VRC.SDKBase.VRC_AvatarParameterDriver.ChangeType.Set,
                 name = Component.ParameterName,
                 value = value ? 1 : 0,
+            };
+        }
+
+        class ChooseGenerator : SubReceiverGenerator
+        {
+            public ChooseGenerator(ContactSyncGenerator gen, ContactSyncReceiver com) : base(gen, com)
+            {
+            }
+
+            protected override void GenerateAnimator()
+            {
+                var layer = Controller.AddNewLayer(Name(nameof(Contact)));
+                layer.EntryPosition(-300, 0);
+                layer.ExitPosition(300, 0);
+
+                var idleState = layer.AddNewState("Idle").Position(0, -100);
+                layer.AddEntryTransition(idleState).Less(ParameterName.Contact, Constant.FloatPrecision);
+                idleState.AddExitTransition().Greater(ParameterName.Contact, Constant.FloatPrecision);
+                layer.DefaultState(idleState);
+                for (var i = 0; i < ChooseConstant.MaxChoiceCount; i++)
+                {
+                    var contactValue = ChooseConstant.MinContactValue + ChooseConstant.ContactValueStep * i;
+                    var (min, max) = (contactValue - ChooseConstant.HalfContactValueStep, contactValue + ChooseConstant.HalfContactValueStep);
+                    var state = layer.AddNewState($"Choice {i}").Position(0, i * 100).AddParameterDriver(Set(i));
+                    layer.AddEntryTransition(state).Greater(ParameterName.Contact, min).Less(ParameterName.Contact, max);
+                    state.AddExitTransition().Less(ParameterName.Contact, min);
+                    state.AddExitTransition().Greater(ParameterName.Contact, max);
+                }
+            }
+
+            VRC.SDKBase.VRC_AvatarParameterDriver.Parameter Set(int value) => new VRC.SDKBase.VRC_AvatarParameterDriver.Parameter
+            {
+                type = VRC.SDKBase.VRC_AvatarParameterDriver.ChangeType.Set,
+                name = Component.ParameterName,
+                value = value,
+            };
+        }
+
+        class RadialGenerator : SubReceiverGenerator
+        {
+            public RadialGenerator(ContactSyncGenerator gen, ContactSyncReceiver com) : base(gen, com)
+            {
+            }
+
+            protected override void GenerateAnimator()
+            {
+                var layer = Controller.AddNewLayer(Name(nameof(Contact)));
+                layer.EntryPosition(0, 0);
+                var idleState = layer.AddNewState("Idle").Position(0, -100);
+                var valueState = layer.AddNewState("value").Position(0, -200).AddParameterDriver(Copy());
+                layer.ExitPosition(300, 0);
+                layer.DefaultState(idleState);
+                idleState.AddTransition(valueState).Greater(ParameterName.Contact, Constant.FloatPrecision);
+                valueState.AddExitTransition().AutoExit();
+            }
+
+            VRC.SDKBase.VRC_AvatarParameterDriver.Parameter Copy() => new VRC.SDKBase.VRC_AvatarParameterDriver.Parameter
+            {
+                type = VRC.SDKBase.VRC_AvatarParameterDriver.ChangeType.Copy,
+                name = Component.ParameterName,
+                source = ParameterName.Contact,
+                convertRange = true,
+                sourceMin = RadialConstant.MinContactValue,
+                sourceMax = RadialConstant.MaxContactValue,
+                destMin = 0,
+                destMax = 1,
             };
         }
     }
