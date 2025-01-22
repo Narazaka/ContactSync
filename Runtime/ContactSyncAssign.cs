@@ -6,6 +6,7 @@ using VRC.SDKBase;
 
 namespace Narazaka.VRChat.ContactSync
 {
+    [AddComponentMenu("ContactSync/ContactSync Assign")]
     [DisallowMultipleComponent]
     public class ContactSyncAssign : MonoBehaviour, IEditorOnly
     {

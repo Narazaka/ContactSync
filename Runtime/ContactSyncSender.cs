@@ -3,6 +3,7 @@ using nadena.dev.modular_avatar.core;
 
 namespace Narazaka.VRChat.ContactSync
 {
+    [AddComponentMenu("ContactSync/Parts/ContactSync Sender")]
     public class ContactSyncSender : ContactSyncCommunicator
     {
         [SerializeField] public bool AllowUnconstrained = true; // 無指定状態があるかどうか

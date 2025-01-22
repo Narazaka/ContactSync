@@ -3,7 +3,7 @@ using VRC.SDKBase;
 
 namespace Narazaka.VRChat.ContactSync
 {
-    public class ContactSyncParts : MonoBehaviour, IEditorOnly
+    public abstract class ContactSyncParts : MonoBehaviour, IEditorOnly
     {
     }
 }

@@ -6,6 +6,7 @@ using VRC.SDKBase;
 
 namespace Narazaka.VRChat.ContactSync
 {
+    [AddComponentMenu("ContactSync/Parts/ContactSync MatchKey")]
     public class ContactSyncMatchKey : ContactSyncParts
     {
         [SerializeField] public byte MatchKeyA = 128;

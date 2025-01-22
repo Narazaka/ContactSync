@@ -6,6 +6,7 @@ using VRC.SDKBase;
 
 namespace Narazaka.VRChat.ContactSync
 {
+    [AddComponentMenu("ContactSync/Parts/ContactSync Receiver")]
     public class ContactSyncReceiver : ContactSyncCommunicator
     {
         [SerializeField] public string ParameterName;
