@@ -6,6 +6,8 @@ namespace Narazaka.VRChat.ContactSync.Editor
 {
     public class ContactSyncPlugin : Plugin<ContactSyncPlugin>
     {
+        public override string DisplayName => "Contact Sync";
+        public override string QualifiedName => "net.narazaka.vrchat.contact-sync";
         protected override void Configure()
         {
             InPhase(BuildPhase.Generating).BeforePlugin("nadena.dev.modular-avatar").Run("ContactSync", (ctx) =>
