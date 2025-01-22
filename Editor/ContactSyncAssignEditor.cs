@@ -49,7 +49,8 @@ namespace Narazaka.VRChat.ContactSync.Editor
                     var path = EditorUtility.SaveFilePanelInProject("Create ContactSyncTagGroup", System.IO.Path.GetFileNameWithoutExtension(defaultPath), "asset", "", "Assets/ContactSyncTagGroups");
                     if (string.IsNullOrEmpty(path)) return;
                     var asset = ScriptableObject.CreateInstance<ContactSyncTagGroup>();
-                    asset.Name = GUID.Generate().ToString();
+                    asset.Name = CryptoUtil.RandomHash();
+                    asset.Tags = new Tag[0];
                     EditorUtility.SetDirty(asset);
                     AssetDatabase.CreateAsset(asset, path);
                     AssetDatabase.SaveAssets();

@@ -17,8 +17,11 @@ namespace Narazaka.VRChat.ContactSync.Editor
         ReorderableList TagsList;
 #endif
 
+        float helpBoxHeight;
+
         void OnEnable()
         {
+            helpBoxHeight = EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
             Name = serializedObject.FindProperty(nameof(ContactSyncTagGroup.Name));
             Token = serializedObject.FindProperty(nameof(ContactSyncTagGroup.Token));
             EncryptTag = serializedObject.FindProperty(nameof(ContactSyncTagGroup.EncryptTag));
@@ -80,8 +83,6 @@ namespace Narazaka.VRChat.ContactSync.Editor
 
             serializedObject.ApplyModifiedProperties();
         }
-
-        float helpBoxHeight = EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
 
         public float GetHeight()
         {
