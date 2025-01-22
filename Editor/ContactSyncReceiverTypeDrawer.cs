@@ -16,7 +16,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
         }).ToArray();
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            property.enumValueIndex = EditorGUI.Popup(position, property.enumValueIndex, Labels.Select(l => (string)l).ToArray());
+            property.enumValueIndex = EditorGUI.Popup(position, property.enumValueIndex - ContactSyncReceiverTypeUtil.MinEnum, Labels.Skip(ContactSyncReceiverTypeUtil.MinEnum).Select(l => (string)l).ToArray()) + ContactSyncReceiverTypeUtil.MinEnum;
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => EditorGUIUtility.singleLineHeight;

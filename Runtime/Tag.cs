@@ -8,7 +8,7 @@ namespace Narazaka.VRChat.ContactSync
     {
         [Tooltip("Tag base name")]
         public string Name;
-        public ContactSyncReceiverType ReceiverType = ContactSyncReceiverType.Toggle;
+        public ContactSyncReceiverType ReceiverType = ContactSyncReceiverTypeUtil.DefaultEnum;
         public float MinVelocity = 0.05f;
         public TagRole Sender;
         [Tooltip("Memo (does not affect runtime)")]

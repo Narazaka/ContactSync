@@ -18,6 +18,8 @@ namespace Narazaka.VRChat.ContactSync.Editor
             var sender = property.FindPropertyRelative(nameof(Tag.Sender));
             var memo = property.FindPropertyRelative(nameof(Tag.Memo));
 
+            if (receiverType.enumValueIndex < ContactSyncReceiverTypeUtil.MinEnum) receiverType.enumValueIndex = (int)ContactSyncReceiverTypeUtil.DefaultEnum;
+
             var rect = position;
             rect.height = EditorGUIUtility.singleLineHeight;
 
