@@ -82,14 +82,18 @@ namespace Narazaka.VRChat.ContactSync.Editor
             EditorGUI.BeginDisabledGroup((target as Component).GetComponent<ModularAvatarMenuInstaller>() != null);
             if (GUILayout.Button(T.AddMAMenuInstaller))
             {
-                Undo.RegisterCreatedObjectUndo((target as Component).gameObject.AddComponent<ModularAvatarMenuInstaller>(), "Create MA Menu Installer");
+                var c = (target as Component).gameObject.AddComponent<ModularAvatarMenuInstaller>();
+                UnityEditorInternal.ComponentUtility.MoveComponentUp(c);
+                Undo.RegisterCreatedObjectUndo(c, "Create MA Menu Installer");
             }
             EditorGUI.EndDisabledGroup();
 
             EditorGUI.BeginDisabledGroup((target as Component).GetComponent<ModularAvatarMenuGroup>() != null);
             if (GUILayout.Button(T.AddMAMenuGroup))
             {
-                Undo.RegisterCreatedObjectUndo((target as Component).gameObject.AddComponent<ModularAvatarMenuGroup>(), "Create MA Menu Group");
+                var c = (target as Component).gameObject.AddComponent<ModularAvatarMenuGroup>();
+                UnityEditorInternal.ComponentUtility.MoveComponentUp(c);
+                Undo.RegisterCreatedObjectUndo(c, "Create MA Menu Group");
             }
             EditorGUI.EndDisabledGroup();
 
