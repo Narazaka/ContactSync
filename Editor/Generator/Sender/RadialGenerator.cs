@@ -39,7 +39,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
 
             if (Component.AllowUnconstrained)
             {
-                var idleState = layer.AddNewState("Idle").Position(0, 100).CreateClip(Name("Idle"), clip => clip.Active(ContactPath, false));
+                var idleState = layer.AddNewState("Idle").Position(0, 100).CreateClip(Name("Idle"), clip => clip.Active(ContactPath, true).Position(ContactPath, UnconstrainedPosition));
                 layer.ExitPosition(300, 0);
                 layer.DefaultState(idleState);
                 idleState.AddTransition(state).If(ParameterName.ON);
