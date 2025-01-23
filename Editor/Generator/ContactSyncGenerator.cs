@@ -24,10 +24,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
 
         internal static Vector3 ContainerBaseOffset = new Vector3(0, -200, 0);
 
-        static Transform _fixPrefab;
-        static Transform FixPrefab => _fixPrefab ??= AssetDatabase.LoadAssetAtPath<GameObject>("Packages/net.narazaka.vrchat.contact-sync/Assets/Origin.prefab").transform;
-
-        public ContactSyncGenerator(BuildContext ctx, Transform avatarRootTransform, ContactSyncAssign assign)
+        public ContactSyncGenerator(BuildContext ctx, Transform parent, ContactSyncAssign assign)
         {
             Context = ctx;
             Assign = assign;
@@ -37,7 +34,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             DirectController = new AnimatorController();
             var parameters = assign.gameObject.AddComponent<ModularAvatarParameters>();
             Parameters = parameters.parameters = new List<ParameterConfig>();
-            Root = GenerateRoot(avatarRootTransform);
+            Root = GenerateRoot(parent);
             Container = GenerateContainer();
 
             var ma = Root.AddComponent<ModularAvatarMergeAnimator>();
@@ -56,21 +53,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         GameObject GenerateRoot(Transform avatarRootTransform)
         {
             var root = avatarRootTransform.CreateGameObjectZero(NameProvider.Name(nameof(Root)));
-            var avatarScale = avatarRootTransform.localScale;
-            root.transform.localScale = new Vector3(1 / avatarScale.x, 1 / avatarScale.y, 1 / avatarScale.z);
-            // root.AddComponent<ModularAvatarWorldFixedObject>();
-            var c = root.AddComponent<VRCParentConstraint>();
-            c.AffectsPositionX = true;
-            c.AffectsPositionY = true;
-            c.AffectsPositionZ = true;
-            c.AffectsRotationX = true;
-            c.AffectsRotationY = true;
-            c.AffectsRotationZ = true;
-            c.Locked = true;
-            c.IsActive = true;
-            c.GlobalWeight = 1;
-            c.Sources.Add(new VRC.Dynamics.VRCConstraintSource(FixPrefab, 1, Vector3.zero, Vector3.zero));
-
             return root;
         }
 
