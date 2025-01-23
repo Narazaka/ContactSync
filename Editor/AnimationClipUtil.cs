@@ -7,9 +7,11 @@ namespace Narazaka.VRChat.ContactSync.Editor
     {
         public static AnimationCurve ShortCurve(float value) => new AnimationCurve(new Keyframe { time = 0, value = value }, new Keyframe { time = 1 / 60f, value = value });
 
-        public static AnimationClip Empty(this AnimationClip clip) => clip.Active("__ContactSync__Empty__", false);
+        static string EmptyName = "__ContactSync__Empty__";
 
-        public static AnimationClip EmptyClip => _emptyClip ??= new AnimationClip().Empty();
+        public static AnimationClip Empty(this AnimationClip clip) => clip.Active(EmptyName, false);
+
+        public static AnimationClip EmptyClip => _emptyClip ??= new AnimationClip { name = EmptyName }.Empty();
 
         static AnimationClip _emptyClip;
 
