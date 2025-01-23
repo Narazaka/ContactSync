@@ -10,6 +10,10 @@ namespace Narazaka.VRChat.ContactSync
         [SerializeField] public float DefaultValue = -1;
         [SerializeField] public bool Saved;
         [SerializeField] public bool HasParentMenu = true;
+        /// <summary>for trigger</summary>
+        [SerializeField] public bool UseToggleButton;
+        /// <summary>for toggle, choice</summary>
+        [SerializeField] public bool UseButton;
         [SerializeField] public MenuItem ParentMenu = new MenuItem();
         [SerializeField] public MenuItem Menu = new MenuItem();
         [SerializeField] public MenuItem OnMenu = new MenuItem();

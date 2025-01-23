@@ -21,8 +21,9 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
                 {
                     parent = Component.gameObject.CreateParentMenu(Component.ParentMenu, DefaultMenuName.ParentMenu);
                 }
-                parent.CreateMenu(Component.OnMenu, VRCExpressionsMenu.Control.ControlType.Toggle, ParameterName.ON, true, DefaultMenuName.OnMenu);
-                parent.CreateMenu(Component.OffMenu, VRCExpressionsMenu.Control.ControlType.Toggle, ParameterName.OFF, true, DefaultMenuName.OffMenu);
+                var buttonType = Component.DefaultValue < 0 && Component.UseButton ? VRCExpressionsMenu.Control.ControlType.Button : VRCExpressionsMenu.Control.ControlType.Toggle;
+                parent.CreateMenu(Component.OnMenu, buttonType, ParameterName.ON, true, DefaultMenuName.OnMenu);
+                parent.CreateMenu(Component.OffMenu, buttonType, ParameterName.OFF, true, DefaultMenuName.OffMenu);
             }
             else
             {

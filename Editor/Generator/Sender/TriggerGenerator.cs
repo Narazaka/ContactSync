@@ -15,7 +15,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
         {
             Component.gameObject.AddComponent<ModularAvatarMenuGroup>();
             var parent = Component.gameObject;
-            parent.CreateMenu(Component.Menu, VRCExpressionsMenu.Control.ControlType.Button, ParameterName.ON, true, DefaultMenuName.Menu);
+            parent.CreateMenu(Component.Menu, Component.UseToggleButton ? VRCExpressionsMenu.Control.ControlType.Toggle : VRCExpressionsMenu.Control.ControlType.Button, ParameterName.ON, true, DefaultMenuName.Menu);
         }
 
         protected override void GenerateAnimator()

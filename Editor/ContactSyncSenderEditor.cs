@@ -43,6 +43,8 @@ namespace Narazaka.VRChat.ContactSync.Editor
             SerializedProperty Saved;
             SerializedProperty HasParentMenu;
             SerializedProperty ParentMenu;
+            SerializedProperty UseToggleButton;
+            SerializedProperty UseButton;
             SerializedProperty Menu;
             SerializedProperty OnMenu;
             SerializedProperty OffMenu;
@@ -58,6 +60,8 @@ namespace Narazaka.VRChat.ContactSync.Editor
                 DefaultValue = serializedObject.FindProperty(nameof(ContactSyncSender.DefaultValue));
                 Saved = serializedObject.FindProperty(nameof(ContactSyncSender.Saved));
                 HasParentMenu = serializedObject.FindProperty(nameof(ContactSyncSender.HasParentMenu));
+                UseToggleButton = serializedObject.FindProperty(nameof(ContactSyncSender.UseToggleButton));
+                UseButton = serializedObject.FindProperty(nameof(ContactSyncSender.UseButton));
                 ParentMenu = serializedObject.FindProperty(nameof(ContactSyncSender.ParentMenu));
                 Menu = serializedObject.FindProperty(nameof(ContactSyncSender.Menu));
                 OnMenu = serializedObject.FindProperty(nameof(ContactSyncSender.OnMenu));
@@ -92,7 +96,11 @@ namespace Narazaka.VRChat.ContactSync.Editor
 
             void DrawDefaultValue(ContactSyncReceiverType receiverType)
             {
-                if (receiverType == ContactSyncReceiverType.Trigger) return;
+                if (receiverType == ContactSyncReceiverType.Trigger)
+                {
+                    DrawButtonType(UseToggleButton, T.Button.GUIContent, T.ToggleButton.GUIContent);
+                    return;
+                }
 
                 bool unconstrained = false;
                 if (AllowUnconstrained.boolValue)
@@ -105,6 +113,10 @@ namespace Narazaka.VRChat.ContactSync.Editor
                 }
                 if (unconstrained)
                 {
+                    if (receiverType == ContactSyncReceiverType.Toggle || receiverType == ContactSyncReceiverType.Choose)
+                    {
+                        DrawButtonType(UseButton, T.ToggleButton.GUIContent, T.Button.GUIContent);
+                    }
                     return;
                 }
                 if (DefaultValue.floatValue < 0)
@@ -206,6 +218,14 @@ namespace Narazaka.VRChat.ContactSync.Editor
             {
                 MenuItemDrawer.PropertyField(OnMenu, new GUIContent("ON"), DefaultMenuName.OnMenu);
             }
+
+            void DrawButtonType(SerializedProperty useAlternateButton, GUIContent defaultButton, GUIContent alternateButton)
+            {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField(T.ButtonType.GUIContent, GUILayout.Width(EditorGUIUtility.labelWidth));
+                useAlternateButton.boolValue = GUILayout.Toolbar(useAlternateButton.boolValue ? 1 : 0, new GUIContent[] { defaultButton, alternateButton }) != 0;
+                EditorGUILayout.EndHorizontal();
+            }
         }
 
         static HashSet<ContactSyncReceiverType> AllowUnconstrainedTypes = new() { ContactSyncReceiverType.Toggle, ContactSyncReceiverType.Choose, ContactSyncReceiverType.Radial };
@@ -217,6 +237,9 @@ namespace Narazaka.VRChat.ContactSync.Editor
             public static istring AllowUnconstrained => new("Allow Unconstrained", "無指定を可能に");
             public static istring Saved => new("Saved", "保存する");
             public static istring HasParentMenu => new("Has Parent Menu", "親メニューを作る");
+            public static istring ButtonType => new("Button Type", "ボタンタイプ");
+            public static istring ToggleButton => new("Toggle Button", "トグルボタン");
+            public static istring Button => new("Button (One Shot)", "ボタン（単押し）");
             public static istring ParentMenu => new("Parent Menu", "親メニュー");
             public static istring ChoiceNames => new("Choice Names", "選択肢名");
         }
