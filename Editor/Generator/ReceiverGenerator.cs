@@ -234,11 +234,11 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             {
                 var layer = Controller.AddNewLayer(Name(nameof(Contact)));
                 layer.EntryPosition(0, 0);
-                var idleState = layer.AddNewState("Idle").Position(0, -100);
-                var valueState = layer.AddNewState("value").Position(0, -200).AddParameterDriver(Copy());
-                layer.ExitPosition(300, 0);
+                var idleState = layer.AddNewState("Idle").Position(0, 100);
+                var valueState = layer.AddNewState("value").Position(0, 200).AddParameterDriver(Copy());
+                layer.ExitPosition(0, 300);
                 layer.DefaultState(idleState);
-                idleState.AddTransition(valueState).Greater(ParameterName.Contact, Constant.FloatPrecision).Less(ParameterName.Contact, 1 - Constant.FloatPrecision);
+                idleState.AddTransition(valueState).Greater(ParameterName.Contact, RadialConstant.MinSideInvalidMargin).Less(ParameterName.Contact, RadialConstant.MaxSideInvalidMargin);
                 valueState.AddExitTransition().AutoExit();
             }
 

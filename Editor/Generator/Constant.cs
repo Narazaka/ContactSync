@@ -1,6 +1,4 @@
-using nadena.dev.modular_avatar.core;
 using UnityEngine;
-using VRC.SDK3.Avatars.ScriptableObjects;
 
 namespace Narazaka.VRChat.ContactSync.Editor.Generator
 {
@@ -9,9 +7,13 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         internal const float FloatPrecision = 1 / 255f;
         internal const float SenderContactRadius = FloatPrecision;
         internal static Vector3 Direction = Vector3.down;
-        internal static Vector3 FullDirection = Direction * 1;
+        /** should near min */
+        internal static Vector3 MostMinPosition = Direction * 1;
+        /** should near max */
+        internal static Vector3 MostMaxPosition = Vector3.zero;
 
+        // because inner edge makes value
         internal static Vector3 EdgeToCenter(Vector3 edge) => edge + Direction * SenderContactRadius;
-        internal static float EdgePositionToContactValue(Vector3 edge) => 1f - Vector3.Dot(edge, FullDirection);
+        internal static float EdgePositionToContactValue(Vector3 edge) => Vector3.Dot(edge - MostMinPosition, MostMaxPosition - MostMinPosition);
     }
 }
