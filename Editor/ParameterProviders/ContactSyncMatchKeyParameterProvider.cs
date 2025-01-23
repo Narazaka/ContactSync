@@ -14,36 +14,78 @@ namespace Narazaka.VRChat.ContactSync.Editor.ParameterProvider
 
         public override IList<VRCExpressionParameters.Parameter> GetParameters()
         {
-            var parameters = new List<VRCExpressionParameters.Parameter>
+            var parameters = new List<VRCExpressionParameters.Parameter>();
+            parameters.AddRange(GetCoreParameters());
+            parameters.AddRange(GetUIParameters());
+            return parameters;
+        }
+
+        public IList<VRCExpressionParameters.Parameter> GetCoreParameters()
+        {
+            return new List<VRCExpressionParameters.Parameter>
             {
                 new VRCExpressionParameters.Parameter
                 {
                     name = NameProvider.ParameterName.MatchKeyA,
-                    valueType = VRCExpressionParameters.ValueType.Float,
-                    defaultValue = 1f * Component.MatchKeyA / ContactSyncMatchKey.MaxValue,
+                    valueType = VRCExpressionParameters.ValueType.Int,
+                    defaultValue = Component.MatchKeyA,
                     networkSynced = true,
                     saved = Component.Saved,
                 },
                 new VRCExpressionParameters.Parameter
                 {
                     name = NameProvider.ParameterName.MatchKeyB,
-                    valueType = VRCExpressionParameters.ValueType.Float,
-                    defaultValue = 1f * Component.MatchKeyB / ContactSyncMatchKey.MaxValue,
+                    valueType = VRCExpressionParameters.ValueType.Int,
+                    defaultValue = Component.MatchKeyB,
                     networkSynced = true,
                     saved = Component.Saved,
+                },
+            };
+        }
+
+        public IList<VRCExpressionParameters.Parameter> GetUIParameters()
+        {
+            var parameters = new List<VRCExpressionParameters.Parameter> {
+                new VRCExpressionParameters.Parameter
+                {
+                    name = NameProvider.ParameterName.MatchKeyAInt,
+                    valueType = VRCExpressionParameters.ValueType.Int,
+                    defaultValue = Component.MatchKeyA,
+                    networkSynced = false,
+                },
+                new VRCExpressionParameters.Parameter
+                {
+                    name = NameProvider.ParameterName.MatchKeyBInt,
+                    valueType = VRCExpressionParameters.ValueType.Int,
+                    defaultValue = Component.MatchKeyB,
+                    networkSynced = false,
+                },
+                new VRCExpressionParameters.Parameter
+                {
+                    name = NameProvider.ParameterName.MatchKeyAFloat,
+                    valueType = VRCExpressionParameters.ValueType.Float,
+                    defaultValue = 0,
+                    networkSynced = false,
+                },
+                new VRCExpressionParameters.Parameter
+                {
+                    name = NameProvider.ParameterName.MatchKeyBFloat,
+                    valueType = VRCExpressionParameters.ValueType.Float,
+                    defaultValue = 0,
+                    networkSynced = false,
                 },
                 new VRCExpressionParameters.Parameter
                 {
                     name = NameProvider.ParameterName.MatchKeyAUI,
                     valueType = VRCExpressionParameters.ValueType.Float,
-                    defaultValue = 1f * Component.MatchKeyA / ContactSyncMatchKey.MaxValue,
+                    defaultValue = Component.MatchKeyA / 100f,
                     networkSynced = false,
                 },
                 new VRCExpressionParameters.Parameter
                 {
                     name = NameProvider.ParameterName.MatchKeyBUI,
                     valueType = VRCExpressionParameters.ValueType.Float,
-                    defaultValue = 1f * Component.MatchKeyB / ContactSyncMatchKey.MaxValue,
+                    defaultValue = Component.MatchKeyB / 100f,
                     networkSynced = false,
                 },
                 new VRCExpressionParameters.Parameter

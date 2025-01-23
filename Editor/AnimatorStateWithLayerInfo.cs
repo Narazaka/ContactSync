@@ -75,6 +75,14 @@ namespace Narazaka.VRChat.ContactSync.Editor
             return this;
         }
 
+        public AnimatorStateWithLayerInfo Create1DBlendTree(string name, string blendParameter, System.Action<BlendTree> action)
+        {
+            var clip = new BlendTree { blendType = BlendTreeType.Simple1D, name = name, blendParameter = blendParameter, useAutomaticThresholds = false };
+            Motion(clip);
+            action(clip);
+            return this;
+        }
+
         public AnimatorStateWithLayerInfo CreateDirectBlendTree(string name, System.Action<BlendTree> action)
         {
             var clip = new BlendTree { blendType = BlendTreeType.Direct, name = name };

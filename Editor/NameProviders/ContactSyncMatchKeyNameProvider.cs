@@ -8,6 +8,10 @@ namespace Narazaka.VRChat.ContactSync.Editor.NameProvider
         {
             public string MatchKeyA;
             public string MatchKeyB;
+            public string MatchKeyAFloat;
+            public string MatchKeyBFloat;
+            public string MatchKeyAInt;
+            public string MatchKeyBInt;
             public string MatchKeyAUI;
             public string MatchKeyBUI;
             public string Sync;
@@ -20,6 +24,10 @@ namespace Narazaka.VRChat.ContactSync.Editor.NameProvider
             {
                 MatchKeyA = Name(nameof(ParameterNames.MatchKeyA)),
                 MatchKeyB = Name(nameof(ParameterNames.MatchKeyB)),
+                MatchKeyAFloat = Name(nameof(ParameterNames.MatchKeyAFloat)),
+                MatchKeyBFloat = Name(nameof(ParameterNames.MatchKeyBFloat)),
+                MatchKeyAInt = Name(nameof(ParameterNames.MatchKeyAInt)),
+                MatchKeyBInt = Name(nameof(ParameterNames.MatchKeyBInt)),
                 MatchKeyAUI = Name(nameof(ParameterNames.MatchKeyAUI)),
                 MatchKeyBUI = Name(nameof(ParameterNames.MatchKeyBUI)),
                 Sync = Name(nameof(ParameterNames.Sync)),
