@@ -41,7 +41,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
             for (var i = 0; i < Component.ChooseMenus.Length; i++)
             {
                 var value = Component.AllowUnconstrained ? i + 1 : i;
-                var state = layer.AddNewState($"Choice {i}").Position(0, i * 100).CreateClip(Name($"Choice {i}"), clip => clip.Active(ContactPath, true).Position(ContactPath, ChooseConstant.MinPosition + ChooseConstant.Step * i));
+                var state = layer.AddNewState($"Choice {i}").Position(0, i * 100).CreateClip(Name($"Choice {i}"), clip => clip.Active(ContactPath, true).Position(ContactPath, ChooseConstant.MinCenterPosition + ChooseConstant.Step * i));
                 layer.AddEntryTransition(state).Equal(ParameterName.Value, value);
                 state.AddExitTransition().NotEqual(ParameterName.Value, value);
                 if (!Component.AllowUnconstrained && i == 0)

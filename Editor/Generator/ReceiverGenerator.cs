@@ -173,11 +173,11 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
                 var offState = layer.AddNewState("Off").Position(0, 200).AddParameterDriver(Set(false));
                 var onState = layer.AddNewState("On").Position(0, 300).AddParameterDriver(Set(true));
                 layer.DefaultState(idleState);
-                // layer.AddEntryTransition(idleState).Less(ParameterName.Contact, FloatPrecision);
                 idleState.AddExitTransition().Greater(ParameterName.Contact, Constant.FloatPrecision);
-                layer.AddEntryTransition(offState).Greater(ParameterName.Contact, Constant.FloatPrecision).Less(ParameterName.Contact, 0.5f);
+                idleState.AddExitTransition().Less(ParameterName.Contact, 1 - Constant.FloatPrecision);
+                layer.AddEntryTransition(offState).Greater(ParameterName.Contact, ToggleConstant.OFFContactValue - ToggleConstant.ContactValuePrecision).Less(ParameterName.Contact, ToggleConstant.OFFContactValue + ToggleConstant.ContactValuePrecision);
                 offState.AddExitTransition().AutoExit();
-                layer.AddEntryTransition(onState).Greater(ParameterName.Contact, 0.5f);
+                layer.AddEntryTransition(onState).Greater(ParameterName.Contact, ToggleConstant.ONContactValue - ToggleConstant.ContactValuePrecision).Less(ParameterName.Contact, ToggleConstant.ONContactValue + ToggleConstant.ContactValuePrecision);
                 onState.AddExitTransition().AutoExit();
             }
 
@@ -202,9 +202,9 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
                 layer.ExitPosition(300, 0);
 
                 var idleState = layer.AddNewState("Idle").Position(0, -100);
-                layer.AddEntryTransition(idleState).Less(ParameterName.Contact, Constant.FloatPrecision);
-                idleState.AddExitTransition().Greater(ParameterName.Contact, Constant.FloatPrecision);
                 layer.DefaultState(idleState);
+                idleState.AddExitTransition().Greater(ParameterName.Contact, Constant.FloatPrecision);
+                idleState.AddExitTransition().Less(ParameterName.Contact, 1 - Constant.FloatPrecision);
                 for (var i = 0; i < ChooseConstant.MaxChoiceCount; i++)
                 {
                     var contactValue = ChooseConstant.MinContactValue + ChooseConstant.ContactValueStep * i;
@@ -238,7 +238,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
                 var valueState = layer.AddNewState("value").Position(0, -200).AddParameterDriver(Copy());
                 layer.ExitPosition(300, 0);
                 layer.DefaultState(idleState);
-                idleState.AddTransition(valueState).Greater(ParameterName.Contact, Constant.FloatPrecision);
+                idleState.AddTransition(valueState).Greater(ParameterName.Contact, Constant.FloatPrecision).Less(ParameterName.Contact, 1 - Constant.FloatPrecision);
                 valueState.AddExitTransition().AutoExit();
             }
 

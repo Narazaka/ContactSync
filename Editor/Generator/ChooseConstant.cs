@@ -6,14 +6,14 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
 {
     static class ChooseConstant
     {
-        internal static Vector3 MinPosition = Vector3.down * 0.9f;
-        internal static Vector3 MaxPosition = Vector3.zero;
+        internal static Vector3 MinEdgePosition = Constant.Direction * 0.9f;
+        internal static Vector3 MaxEdgePosition = Constant.Direction * 0.1f;
+        internal static Vector3 MinCenterPosition = Constant.EdgeToCenter(MinEdgePosition);
         internal const int MaxChoiceCount = 16;
-        internal static Vector3 Step = (MaxPosition - MinPosition) / (MaxChoiceCount - 1);
+        internal static Vector3 Step = (MaxEdgePosition - MinEdgePosition) / (MaxChoiceCount - 1);
 
-        internal static Vector3 EdgePosition = Vector3.down;
-        internal static float MinContactValue = MinPosition.y - EdgePosition.y;
-        internal const float MaxContactValue = 1f;
+        internal static float MinContactValue = Constant.EdgePositionToContactValue(MinEdgePosition);
+        internal static float MaxContactValue = Constant.EdgePositionToContactValue(MaxEdgePosition);
         internal static float ContactValueStep = (MaxContactValue - MinContactValue) / (MaxChoiceCount - 1);
         internal static float HalfContactValueStep = ContactValueStep / 2;
     }

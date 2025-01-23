@@ -42,16 +42,13 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
             }
         }
 
-        static Vector3 OFFPosition = Vector3.down * 0.75f;
-        static Vector3 ONPosition = Vector3.zero;
-
         void GenerateUnconstrainedAnimator()
         {
             var layer = Controller.AddNewLayer(Name(nameof(Contact)));
             layer.EntryPosition(-300, 200);
             var idleState = layer.AddNewState("Idle").Position(0, 200).CreateClip(Name("Idle"), clip => clip.Active(ContactPath, false));
-            var offState = layer.AddNewState("OFF").Position(300, 100).CreateClip(Name("OFF"), clip => clip.Active(ContactPath, true).Position(ContactPath, OFFPosition)).AddParameterDriver(SetFalse(ParameterName.ON));
-            var onState = layer.AddNewState("ON").Position(300, 300).CreateClip(Name("ON"), clip => clip.Active(ContactPath, true).Position(ContactPath, ONPosition)).AddParameterDriver(SetFalse(ParameterName.OFF));
+            var offState = layer.AddNewState("OFF").Position(300, 100).CreateClip(Name("OFF"), clip => clip.Active(ContactPath, true).Position(ContactPath, ToggleConstant.OFFCenterPosition)).AddParameterDriver(SetFalse(ParameterName.ON));
+            var onState = layer.AddNewState("ON").Position(300, 300).CreateClip(Name("ON"), clip => clip.Active(ContactPath, true).Position(ContactPath, ToggleConstant.ONCenterPosition)).AddParameterDriver(SetFalse(ParameterName.OFF));
             layer.DefaultState(idleState);
             idleState.AddTransition(offState).If(ParameterName.OFF);
             idleState.AddTransition(onState).If(ParameterName.ON);
@@ -67,8 +64,8 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
         {
             var layer = Controller.AddNewLayer(Name(nameof(Contact)));
             layer.EntryPosition(0, 0);
-            var offState = layer.AddNewState("OFF").Position(0, 100).CreateClip(Name("OFF"), clip => clip.Active(ContactPath, true).Position(ContactPath, OFFPosition));
-            var onState = layer.AddNewState("ON").Position(0, 200).CreateClip(Name("ON"), clip => clip.Active(ContactPath, true).Position(ContactPath, ONPosition));
+            var offState = layer.AddNewState("OFF").Position(0, 100).CreateClip(Name("OFF"), clip => clip.Active(ContactPath, true).Position(ContactPath, ToggleConstant.OFFCenterPosition));
+            var onState = layer.AddNewState("ON").Position(0, 200).CreateClip(Name("ON"), clip => clip.Active(ContactPath, true).Position(ContactPath, ToggleConstant.ONCenterPosition));
             layer.ExitPosition(0, 300);
             layer.DefaultState(offState);
             offState.AddTransition(onState).If(ParameterName.ON);
