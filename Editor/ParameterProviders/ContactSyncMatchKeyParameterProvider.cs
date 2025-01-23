@@ -14,6 +14,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.ParameterProvider
 
         public override IList<VRCExpressionParameters.Parameter> GetParameters()
         {
+            if (!Component.CanChangeAtRuntime) return new List<VRCExpressionParameters.Parameter>();
             var parameters = new List<VRCExpressionParameters.Parameter>();
             parameters.AddRange(GetCoreParameters());
             parameters.AddRange(GetUIParameters());

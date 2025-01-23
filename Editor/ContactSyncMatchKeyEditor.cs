@@ -9,6 +9,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
     {
         SerializedProperty MatchKeyA;
         SerializedProperty MatchKeyB;
+        SerializedProperty CanChangeAtRuntime;
         SerializedProperty Saved;
         SerializedProperty HasParentMenu;
         SerializedProperty HasRandomizeMenu;
@@ -22,6 +23,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
         {
             MatchKeyA = serializedObject.FindProperty(nameof(ContactSyncMatchKey.MatchKeyA));
             MatchKeyB = serializedObject.FindProperty(nameof(ContactSyncMatchKey.MatchKeyB));
+            CanChangeAtRuntime = serializedObject.FindProperty(nameof(ContactSyncMatchKey.CanChangeAtRuntime));
             Saved = serializedObject.FindProperty(nameof(ContactSyncMatchKey.Saved));
             HasParentMenu = serializedObject.FindProperty(nameof(ContactSyncMatchKey.HasParentMenu));
             HasRandomizeMenu = serializedObject.FindProperty(nameof(ContactSyncMatchKey.HasRandomizeMenu));
@@ -50,22 +52,27 @@ namespace Narazaka.VRChat.ContactSync.Editor
                 MatchKeyA.intValue = (byte)Random.Range(0, ContactSyncMatchKey.MaxValue + 1);
                 MatchKeyB.intValue = (byte)Random.Range(0, ContactSyncMatchKey.MaxValue + 1);
             }
-            EditorGUILayout.PropertyField(Saved, T.Saved.GUIContent);
-            EditorGUILayout.PropertyField(HasParentMenu, T.HasParentMenu.GUIContent);
-            EditorGUILayout.PropertyField(HasRandomizeMenu, T.HasRandomizeMenu.GUIContent);
-            if (HasParentMenu.boolValue)
+            EditorGUILayout.PropertyField(CanChangeAtRuntime, T.CanChangeAtRuntime.GUIContent);
+
+            if (CanChangeAtRuntime.boolValue)
             {
-                MenuItemDrawer.PropertyField(ParentMenu, T.ParentMenu.GUIContent, ContactSyncMatchKey.DefaultMenuName.Parent);
+                EditorGUILayout.PropertyField(Saved, T.Saved.GUIContent);
+                EditorGUILayout.PropertyField(HasParentMenu, T.HasParentMenu.GUIContent);
+                EditorGUILayout.PropertyField(HasRandomizeMenu, T.HasRandomizeMenu.GUIContent);
+                if (HasParentMenu.boolValue)
+                {
+                    MenuItemDrawer.PropertyField(ParentMenu, T.ParentMenu.GUIContent, ContactSyncMatchKey.DefaultMenuName.Parent);
+                }
+                if (HasParentMenu.boolValue) EditorGUI.indentLevel++;
+                MenuItemDrawer.PropertyField(MatchKeyAMenu, T.MatchKeyA.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeyA);
+                MenuItemDrawer.PropertyField(MatchKeyBMenu, T.MatchKeyB.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeyB);
+                MenuItemDrawer.PropertyField(MatchKeySyncMenu, T.MatchKeySync.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeySync);
+                if (HasRandomizeMenu.boolValue)
+                {
+                    MenuItemDrawer.PropertyField(MatchKeyRandomizeMenu, T.MatchKeyRandomize.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeyRandomize);
+                }
+                if (HasParentMenu.boolValue) EditorGUI.indentLevel--;
             }
-            if (HasParentMenu.boolValue) EditorGUI.indentLevel++;
-            MenuItemDrawer.PropertyField(MatchKeyAMenu, T.MatchKeyA.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeyA);
-            MenuItemDrawer.PropertyField(MatchKeyBMenu, T.MatchKeyB.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeyB);
-            MenuItemDrawer.PropertyField(MatchKeySyncMenu, T.MatchKeySync.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeySync);
-            if (HasRandomizeMenu.boolValue)
-            {
-                MenuItemDrawer.PropertyField(MatchKeyRandomizeMenu, T.MatchKeyRandomize.GUIContent, ContactSyncMatchKey.DefaultMenuName.MatchKeyRandomize);
-            }
-            if (HasParentMenu.boolValue) EditorGUI.indentLevel--;
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -77,6 +84,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
             public static istring MatchKeyA => new("Match Key A", "マッチングキーA");
             public static istring MatchKeyB => new("Match Key B", "マッチングキーB");
             public static istring RandomizeMatchKey => new("Randomize Initial match key", "初期マッチングキーをランダムに決める");
+            public static istring CanChangeAtRuntime => new("Can Change in VRC", "プレイ中変更可能");
             public static istring Saved => new("Saved", "保存する");
             public static istring HasParentMenu => new("Has Parent Menu", "親メニューを作る");
             public static istring HasRandomizeMenu => new("Has Randomize Menu", "ランダム化メニューを作る");

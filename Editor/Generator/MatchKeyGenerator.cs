@@ -47,9 +47,12 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             MatchKeyB.transform.localPosition = new Vector3(0, 0, MatchKey.MatchKeyB * MatchKeyPositionScale);
             Container.SetParentZero(MatchKeyB);
 
-            GenerateParameters();
-            GenerateMenus();
-            GenerateAnimator();
+            if (MatchKey.CanChangeAtRuntime)
+            {
+                GenerateParameters();
+                GenerateMenus();
+                GenerateAnimator();
+            }
             Object.DestroyImmediate(MatchKey);
         }
 

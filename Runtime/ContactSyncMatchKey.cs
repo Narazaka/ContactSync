@@ -12,6 +12,7 @@ namespace Narazaka.VRChat.ContactSync
         public const byte MaxValue = 100;
         [SerializeField] public byte MatchKeyA = 50;
         [SerializeField] public byte MatchKeyB = 50;
+        [SerializeField] public bool CanChangeAtRuntime = true;
         [SerializeField] public bool Saved = true;
         [SerializeField] public bool HasParentMenu = true;
         [SerializeField] public bool HasRandomizeMenu = true;
