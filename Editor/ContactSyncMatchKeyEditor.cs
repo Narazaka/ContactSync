@@ -42,11 +42,13 @@ namespace Narazaka.VRChat.ContactSync.Editor
             serializedObject.UpdateIfRequiredOrScript();
 
             EditorGUILayout.PropertyField(MatchKeyA, T.InitialMatchKeyA.GUIContent);
+            if (MatchKeyA.intValue > ContactSyncMatchKey.MaxValue) MatchKeyA.intValue = ContactSyncMatchKey.MaxValue;
             EditorGUILayout.PropertyField(MatchKeyB, T.InitialMatchKeyB.GUIContent);
+            if (MatchKeyB.intValue > ContactSyncMatchKey.MaxValue) MatchKeyB.intValue = ContactSyncMatchKey.MaxValue;
             if (GUILayout.Button(T.RandomizeMatchKey))
             {
-                MatchKeyA.intValue = (byte)Random.Range(0, 256);
-                MatchKeyB.intValue = (byte)Random.Range(0, 256);
+                MatchKeyA.intValue = (byte)Random.Range(0, ContactSyncMatchKey.MaxValue + 1);
+                MatchKeyB.intValue = (byte)Random.Range(0, ContactSyncMatchKey.MaxValue + 1);
             }
             EditorGUILayout.PropertyField(Saved, T.Saved.GUIContent);
             EditorGUILayout.PropertyField(HasParentMenu, T.HasParentMenu.GUIContent);

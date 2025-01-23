@@ -20,7 +20,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.ParameterProvider
                 {
                     name = NameProvider.ParameterName.MatchKeyA,
                     valueType = VRCExpressionParameters.ValueType.Float,
-                    defaultValue = Component.MatchKeyA / 255f,
+                    defaultValue = 1f * Component.MatchKeyA / ContactSyncMatchKey.MaxValue,
                     networkSynced = true,
                     saved = Component.Saved,
                 },
@@ -28,22 +28,22 @@ namespace Narazaka.VRChat.ContactSync.Editor.ParameterProvider
                 {
                     name = NameProvider.ParameterName.MatchKeyB,
                     valueType = VRCExpressionParameters.ValueType.Float,
-                    defaultValue = Component.MatchKeyB / 255f,
+                    defaultValue = 1f * Component.MatchKeyB / ContactSyncMatchKey.MaxValue,
                     networkSynced = true,
                     saved = Component.Saved,
                 },
                 new VRCExpressionParameters.Parameter
                 {
                     name = NameProvider.ParameterName.MatchKeyAUI,
-                    valueType = VRCExpressionParameters.ValueType.Int,
-                    defaultValue = Component.MatchKeyA,
+                    valueType = VRCExpressionParameters.ValueType.Float,
+                    defaultValue = 1f * Component.MatchKeyA / ContactSyncMatchKey.MaxValue,
                     networkSynced = false,
                 },
                 new VRCExpressionParameters.Parameter
                 {
                     name = NameProvider.ParameterName.MatchKeyBUI,
-                    valueType = VRCExpressionParameters.ValueType.Int,
-                    defaultValue = Component.MatchKeyB,
+                    valueType = VRCExpressionParameters.ValueType.Float,
+                    defaultValue = 1f * Component.MatchKeyB / ContactSyncMatchKey.MaxValue,
                     networkSynced = false,
                 },
                 new VRCExpressionParameters.Parameter

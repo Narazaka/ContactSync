@@ -14,9 +14,8 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         readonly ContactSyncMatchKeyParameterProvider ParameterProvider;
         readonly ContactSyncMatchKeyNameProvider.ParameterNames ParameterName;
 
-        const float MatchKeyPositionScale = 3;
-        const int MaxValue = byte.MaxValue;
-        static int HalfValue = Mathf.CeilToInt(MaxValue / 2f);
+        const float MatchKeyPositionScale = 4;
+        static int HalfValue = Mathf.CeilToInt(ContactSyncMatchKey.MaxValue / 2f);
         static Vector3 OffsetPosition = new Vector3(-HalfValue, 0, -HalfValue) * MatchKeyPositionScale;
 
         GameObject MatchKeyOffset;
@@ -88,10 +87,10 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         {
             var layerX = Controller.AddNewLayer(Name("PositionX"));
             layerX.EntryPosition(0, 0);
-            layerX.AddNewState(nameof(ParameterName.MatchKeyA)).Position(0, 100).CreateClip(Name("PositionX"), clip => clip.PositionFromTo(Path(MatchKeyA), Vector3.zero, new Vector3(MaxValue * MatchKeyPositionScale, 0, 0))).TimeParameter(ParameterName.MatchKeyA);
+            layerX.AddNewState(nameof(ParameterName.MatchKeyA)).Position(0, 100).CreateClip(Name("PositionX"), clip => clip.PositionFromTo(Path(MatchKeyA), Vector3.zero, new Vector3(ContactSyncMatchKey.MaxValue * MatchKeyPositionScale, 0, 0))).TimeParameter(ParameterName.MatchKeyA);
             var layerZ = Controller.AddNewLayer(Name("PositionZ"));
             layerZ.EntryPosition(0, 0);
-            layerZ.AddNewState(nameof(ParameterName.MatchKeyB)).Position(0, 100).CreateClip(Name("PositionZ"), clip => clip.PositionFromTo(Path(MatchKeyB), Vector3.zero, new Vector3(0, 0, MaxValue * MatchKeyPositionScale))).TimeParameter(ParameterName.MatchKeyB);
+            layerZ.AddNewState(nameof(ParameterName.MatchKeyB)).Position(0, 100).CreateClip(Name("PositionZ"), clip => clip.PositionFromTo(Path(MatchKeyB), Vector3.zero, new Vector3(0, 0, ContactSyncMatchKey.MaxValue * MatchKeyPositionScale))).TimeParameter(ParameterName.MatchKeyB);
         }
 
         void GenerateSyncAnimator()
@@ -130,11 +129,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             type = VRC_AvatarParameterDriver.ChangeType.Copy,
             source = sync,
             name = ui,
-            convertRange = true,
-            sourceMin = 0,
-            sourceMax = 1,
-            destMin = 0,
-            destMax = MaxValue,
         };
 
         VRC_AvatarParameterDriver.Parameter CopyFromUI(string ui, string sync) => new VRC_AvatarParameterDriver.Parameter
@@ -142,11 +136,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             type = VRC_AvatarParameterDriver.ChangeType.Copy,
             source = ui,
             name = sync,
-            convertRange = true,
-            sourceMin = 0,
-            sourceMax = MaxValue,
-            destMin = 0,
-            destMax = 1,
         };
 
         VRC_AvatarParameterDriver.Parameter Randomize(string ui) => new VRC_AvatarParameterDriver.Parameter
@@ -154,7 +143,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             type = VRC_AvatarParameterDriver.ChangeType.Random,
             name = ui,
             valueMin = 0,
-            valueMax = MaxValue,
+            valueMax = 1,
         };
     }
 }
