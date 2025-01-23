@@ -4,8 +4,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
 {
     static class Constant
     {
-        internal const float FloatPrecision = 1 / 255f;
-        internal const float SenderContactRadius = FloatPrecision;
+        internal const float SenderContactRadius = 1 / 8f;
         internal static Vector3 Direction = Vector3.down;
         /** should near min */
         internal static Vector3 MostMinPosition = Direction * 1;

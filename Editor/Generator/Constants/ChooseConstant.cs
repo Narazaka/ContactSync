@@ -14,6 +14,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         internal static float MinContactValue = Constant.EdgePositionToContactValue(MinEdgePosition);
         internal static float MaxContactValue = Constant.EdgePositionToContactValue(MaxEdgePosition);
         internal static float ContactValueStep = (MaxContactValue - MinContactValue) / (MaxChoiceCount - 1);
-        internal static float HalfContactValueStep = ContactValueStep / 2;
+        internal static float ContactValuePrecision = ContactValueStep / 2;
     }
 }
