@@ -15,6 +15,8 @@ namespace Narazaka.VRChat.ContactSync
         public string Token;
         [SerializeField]
         public bool EncryptTag;
+        [SerializeField]
+        public int ValueResolution = 16;
         [SerializeField] // memo
         public string AName;
         public string EffectiveAName => string.IsNullOrEmpty(AName) ? "A" : AName;

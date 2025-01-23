@@ -11,6 +11,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         protected readonly Tag[] Tags;
         protected readonly Tag Tag;
         protected readonly int TagIndex;
+        protected readonly ConstantSet Constants;
         public CommunicatorSubGenerator(ContactSyncGenerator gen, T com) : base(gen)
         {
             Component = com;
@@ -18,6 +19,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             Tags = TagGroup.Tags;
             Tag = Tags.First(tag => tag.Name == Component.TagName);
             TagIndex = System.Array.IndexOf(Tags, Tag);
+            Constants = new ConstantSet(TagGroup.ValueResolution);
         }
 
         protected Vector3 TagLocalPositionBase => Vector3.down * TagIndex * 3;

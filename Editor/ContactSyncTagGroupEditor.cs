@@ -10,6 +10,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
         SerializedProperty Name;
         SerializedProperty Token;
         SerializedProperty EncryptTag;
+        SerializedProperty ValueResolution;
         SerializedProperty AName;
         SerializedProperty BName;
         SerializedProperty Tags;
@@ -25,6 +26,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
             Name = serializedObject.FindProperty(nameof(ContactSyncTagGroup.Name));
             Token = serializedObject.FindProperty(nameof(ContactSyncTagGroup.Token));
             EncryptTag = serializedObject.FindProperty(nameof(ContactSyncTagGroup.EncryptTag));
+            ValueResolution = serializedObject.FindProperty(nameof(ContactSyncTagGroup.ValueResolution));
             AName = serializedObject.FindProperty(nameof(ContactSyncTagGroup.AName));
             BName = serializedObject.FindProperty(nameof(ContactSyncTagGroup.BName));
             Tags = serializedObject.FindProperty(nameof(ContactSyncTagGroup.Tags));
@@ -71,6 +73,10 @@ namespace Narazaka.VRChat.ContactSync.Editor
             rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             EditorGUI.HelpBox(new Rect(rect.x, rect.y, rect.width, helpBoxHeight), T.EncryptTagDescription, MessageType.Info);
             rect.y += helpBoxHeight + EditorGUIUtility.standardVerticalSpacing;
+            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), ValueResolution, T.ValueResolution.GUIContent);
+            rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            EditorGUI.HelpBox(new Rect(rect.x, rect.y, rect.width, helpBoxHeight), T.ValueResolutionDescription, MessageType.Info);
+            rect.y += helpBoxHeight + EditorGUIUtility.standardVerticalSpacing;
             EditorGUIHelper.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), AName, T.AName.GUIContent, T.ANamePlaceholder);
             rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             EditorGUIHelper.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), BName, T.BName.GUIContent, T.BNamePlaceholder);
@@ -86,7 +92,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
 
         public float GetHeight()
         {
-            return (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 5 + (helpBoxHeight + EditorGUIUtility.standardVerticalSpacing) * 3 +
+            return (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 6 + (helpBoxHeight + EditorGUIUtility.standardVerticalSpacing) * 4 +
 #if UNITY_2020_3_OR_NEWER
                 EditorGUI.GetPropertyHeight(Tags);
 #else
@@ -103,6 +109,8 @@ namespace Narazaka.VRChat.ContactSync.Editor
             public static istring TokenDescription = new("Enter if you are using it for a specific small group of people, etc.", "特定少数のグループ等で使う場合に入力してください。");
             public static istring EncryptTag = new("Encrypt Tag", "タグを暗号化");
             public static istring EncryptTagDescription = new("Used when you want to keep the tag string secret from others. It is possible to communicate with the same gimmick encrypted.", "タグ文字列を外部から秘匿したい場合に使います。暗号化した同じギミックとは通信可能です。");
+            public static istring ValueResolution = new("Value Resolution", "値の解像度");
+            public static istring ValueResolutionDescription = new("You can make choices as many as this number in a \"Choose\" tag. The larger the number, the more vulnerable it is to movement blur. A different value would make the \"Choose\" and \"Radial\" tags incompatible.", "「選択」タグでこの数だけ選択肢が作れます。大きくすると移動ブレに弱くなります。違う値だと「選択」と「無段階」タグの互換性がなくなります。");
             public static istring GenerateToken = new("Generate Token", "鍵を生成");
             public static istring AName = new("Name of Role A (memo)", "Aの役割名 (メモ)");
             public static istring ANamePlaceholder = new("Commander... A-san...", "指示者... Aさん...");

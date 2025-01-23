@@ -34,7 +34,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
             var layer = Controller.AddNewLayer(Name(nameof(Contact)));
             layer.EntryPosition(0, 0);
 
-            var state = layer.AddNewState("Value").Position(0, 200).CreateClip(Name("Value"), clip => clip.Active(ContactPath, true).PositionFromTo(ContactPath, RadialConstant.MinCenterPosition, RadialConstant.MaxCenterPosition))
+            var state = layer.AddNewState("Value").Position(0, 200).CreateClip(Name("Value"), clip => clip.Active(ContactPath, true).PositionFromTo(ContactPath, Constants.Radial.Min.CenterPosition, Constants.Radial.Max.CenterPosition))
                 .TimeParameter(ParameterName.Value);
 
             if (Component.AllowUnconstrained)
