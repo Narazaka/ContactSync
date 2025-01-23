@@ -49,7 +49,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator.Sender
         {
             var layer = Controller.AddNewLayer(Name(nameof(Contact)));
             layer.EntryPosition(-300, 200);
-            var idleState = layer.AddNewState("Idle").Position(0, 200).CreateClip(Name("Idle"), clip => clip.Active(ContactPath, true).Position(ContactPath, UnconstrainedPosition));
+            var idleState = layer.AddNewState("Idle").Position(0, 200).CreateClip(Name("Idle"), clip => clip.Active(ContactPath, false));
             var offState = layer.AddNewState("OFF").Position(300, 100).CreateClip(Name("OFF"), clip => clip.Active(ContactPath, true).Position(ContactPath, OFFPosition)).AddParameterDriver(SetFalse(ParameterName.ON));
             var onState = layer.AddNewState("ON").Position(300, 300).CreateClip(Name("ON"), clip => clip.Active(ContactPath, true).Position(ContactPath, ONPosition)).AddParameterDriver(SetFalse(ParameterName.OFF));
             layer.DefaultState(idleState);
