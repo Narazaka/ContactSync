@@ -23,7 +23,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         protected string Path(GameObject to) => ContactSyncGenerator.Path(to);
         protected List<ParameterConfig> Parameters => ContactSyncGenerator.Parameters;
         protected AnimatorController Controller => ContactSyncGenerator.Controller;
-        protected AnimatorController DirectController => ContactSyncGenerator.DirectController;
 
         public abstract void Generate();
 
@@ -32,14 +31,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             foreach (var p in parameters)
             {
                 Controller.AddParameter(p.ToAnimatorControllerParameter());
-            }
-        }
-
-        protected void AddParametersToDirectController(IEnumerable<VRCExpressionParameters.Parameter> parameters)
-        {
-            foreach (var p in parameters)
-            {
-                DirectController.AddParameter(p.ToAnimatorControllerParameter());
             }
         }
 

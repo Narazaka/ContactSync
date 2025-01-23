@@ -14,7 +14,14 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         readonly ContactSyncMatchKeyParameterProvider ParameterProvider;
         readonly ContactSyncMatchKeyNameProvider.ParameterNames ParameterName;
 
-        const float MatchKeyPositionScale = 2;
+        const float MatchKeyPositionScale = 3;
+        const int MaxValue = byte.MaxValue;
+        static int HalfValue = Mathf.CeilToInt(MaxValue / 2f);
+        static Vector3 OffsetPosition = new Vector3(-HalfValue, 0, -HalfValue) * MatchKeyPositionScale;
+
+        GameObject MatchKeyOffset;
+        GameObject MatchKeyA;
+        GameObject MatchKeyB;
 
         public MatchKeyGenerator(ContactSyncGenerator gen) : base(gen)
         {
@@ -32,7 +39,13 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         {
             if (MatchKey == null) return;
 
-            Container.transform.localPosition = ContactSyncGenerator.ContainerBaseOffset + new Vector3((MatchKey.MatchKeyA - 128) * MatchKeyPositionScale, 0, (MatchKey.MatchKeyB - 128) * MatchKeyPositionScale);
+            MatchKeyOffset = ContactSyncGenerator.Root.CreateGameObjectZero(nameof(MatchKeyOffset));
+            MatchKeyOffset.transform.localPosition = OffsetPosition;
+            MatchKeyA = MatchKeyOffset.CreateGameObjectZero(nameof(MatchKeyA));
+            MatchKeyA.transform.localPosition = new Vector3(MatchKey.MatchKeyA * MatchKeyPositionScale, 0, 0);
+            MatchKeyB = MatchKeyA.CreateGameObjectZero(nameof(MatchKeyB));
+            MatchKeyB.transform.localPosition = new Vector3(0, 0, MatchKey.MatchKeyB * MatchKeyPositionScale);
+            Container.SetParentZero(MatchKeyB);
 
             GenerateParameters();
             GenerateMenus();
@@ -42,11 +55,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
 
         void GenerateParameters()
         {
-            var directControllerParameters = ParameterProvider.GetDirectControllerParameters();
-            AddParameters(directControllerParameters);
-            AddParametersToDirectController(directControllerParameters);
-            AddParametersToController(directControllerParameters);
-            var controllerParameters = ParameterProvider.GetControllerParameters();
+            var controllerParameters = ParameterProvider.GetParameters();
             AddParameters(controllerParameters);
             AddParametersToController(controllerParameters);
         }
@@ -77,12 +86,12 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
 
         void GeneratePositionAnimator()
         {
-            var layer = DirectController.AddNewLayer(Name("Position"));
-            layer.EntryPosition(0, 0);
-            var offState = layer.AddNewState("Position").WriteDefault(true).Position(0, 100).CreateDirectBlendTree(Name("Position"), clip => clip
-                .AddChildClip(Name("A"), ParameterName.MatchKeyA, clip => clip.PositionFromTo(Path(Container), ContactSyncGenerator.ContainerBaseOffset + new Vector3(-128 * MatchKeyPositionScale, 0, 0), ContactSyncGenerator.ContainerBaseOffset + new Vector3(127 * MatchKeyPositionScale, 0, 0)))
-                .AddChildClip(Name("B"), ParameterName.MatchKeyB, clip => clip.PositionFromTo(Path(Container), ContactSyncGenerator.ContainerBaseOffset + new Vector3(0, 0, -128 * MatchKeyPositionScale), ContactSyncGenerator.ContainerBaseOffset + new Vector3(0, 0, 127 * MatchKeyPositionScale)))
-            );
+            var layerX = Controller.AddNewLayer(Name("PositionX"));
+            layerX.EntryPosition(0, 0);
+            layerX.AddNewState(nameof(ParameterName.MatchKeyA)).Position(0, 100).CreateClip(Name("PositionX"), clip => clip.PositionFromTo(Path(MatchKeyA), Vector3.zero, new Vector3(MaxValue * MatchKeyPositionScale, 0, 0))).TimeParameter(ParameterName.MatchKeyA);
+            var layerZ = Controller.AddNewLayer(Name("PositionZ"));
+            layerZ.EntryPosition(0, 0);
+            layerZ.AddNewState(nameof(ParameterName.MatchKeyB)).Position(0, 100).CreateClip(Name("PositionZ"), clip => clip.PositionFromTo(Path(MatchKeyB), Vector3.zero, new Vector3(0, 0, MaxValue * MatchKeyPositionScale))).TimeParameter(ParameterName.MatchKeyB);
         }
 
         void GenerateSyncAnimator()
@@ -125,7 +134,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             sourceMin = 0,
             sourceMax = 1,
             destMin = 0,
-            destMax = 255,
+            destMax = MaxValue,
         };
 
         VRC_AvatarParameterDriver.Parameter CopyFromUI(string ui, string sync) => new VRC_AvatarParameterDriver.Parameter
@@ -135,7 +144,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             name = sync,
             convertRange = true,
             sourceMin = 0,
-            sourceMax = 255,
+            sourceMax = MaxValue,
             destMin = 0,
             destMax = 1,
         };
@@ -145,7 +154,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             type = VRC_AvatarParameterDriver.ChangeType.Random,
             name = ui,
             valueMin = 0,
-            valueMax = 255,
+            valueMax = MaxValue,
         };
     }
 }

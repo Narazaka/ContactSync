@@ -16,7 +16,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
         internal readonly ContactSyncAssignNameProvider NameProvider;
         internal readonly ContactSyncCommunicator[] Communicators;
         internal AnimatorController Controller;
-        internal AnimatorController DirectController;
         internal List<ParameterConfig> Parameters;
 
         internal GameObject Root;
@@ -31,7 +30,6 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             NameProvider = new ContactSyncAssignNameProvider(assign);
             Communicators = assign.ContactSyncCommunicators;
             Controller = new AnimatorController();
-            DirectController = new AnimatorController();
             var parameters = assign.gameObject.AddComponent<ModularAvatarParameters>();
             Parameters = parameters.parameters = new List<ParameterConfig>();
             Root = GenerateRoot(parent);
@@ -42,24 +40,18 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             ma.layerType = VRC.SDK3.Avatars.Components.VRCAvatarDescriptor.AnimLayerType.FX;
             ma.matchAvatarWriteDefaults = true;
             ma.pathMode = MergeAnimatorPathMode.Relative;
-
-            var directMa = Root.AddComponent<ModularAvatarMergeAnimator>();
-            directMa.animator = DirectController;
-            directMa.layerType = VRC.SDK3.Avatars.Components.VRCAvatarDescriptor.AnimLayerType.FX;
-            directMa.matchAvatarWriteDefaults = false;
-            directMa.pathMode = MergeAnimatorPathMode.Relative;
         }
 
         GameObject GenerateRoot(Transform avatarRootTransform)
         {
             var root = avatarRootTransform.CreateGameObjectZero(NameProvider.Name(nameof(Root)));
+            root.transform.localPosition = ContainerBaseOffset;
             return root;
         }
 
         GameObject GenerateContainer()
         {
             var obj = Root.CreateGameObjectZero(NameProvider.Name(nameof(Container)));
-            obj.transform.localPosition = ContainerBaseOffset;
             return obj;
         }
 
@@ -68,8 +60,8 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
 
         public void Generate()
         {
-            new AllToggleGenerator(this).Generate();
             new MatchKeyGenerator(this).Generate();
+            new AllToggleGenerator(this).Generate();
             GenerateCommunicators();
             Object.DestroyImmediate(Assign);
         }

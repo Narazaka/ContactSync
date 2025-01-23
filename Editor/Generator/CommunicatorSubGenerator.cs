@@ -22,7 +22,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
             Constants = new ConstantSet(TagGroup.ValueResolution);
         }
 
-        protected Vector3 TagLocalPositionBase => Vector3.down * TagIndex * 3;
+        protected Vector3 TagLocalPositionBase => Vector3.down * (TagIndex + 10) * 3; // 10 slots reserved
         protected string CollisionTag => Component.EffectiveTagBase(TagGroup);
         protected List<string> CollisionTags => new List<string> { CollisionTag };
     }

@@ -14,12 +14,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.ParameterProvider
 
         public override IList<VRCExpressionParameters.Parameter> GetParameters()
         {
-            return GetDirectControllerParameters().Concat(GetControllerParameters()).ToArray();
-        }
-
-        public IList<VRCExpressionParameters.Parameter> GetDirectControllerParameters()
-        {
-            return new[]
+            var parameters = new List<VRCExpressionParameters.Parameter>
             {
                 new VRCExpressionParameters.Parameter
                 {
@@ -36,14 +31,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.ParameterProvider
                     defaultValue = Component.MatchKeyB / 255f,
                     networkSynced = true,
                     saved = Component.Saved,
-                }
-            };
-        }
-
-        public IList<VRCExpressionParameters.Parameter> GetControllerParameters()
-        {
-            var parameters = new List<VRCExpressionParameters.Parameter>
-            {
+                },
                 new VRCExpressionParameters.Parameter
                 {
                     name = NameProvider.ParameterName.MatchKeyAUI,
