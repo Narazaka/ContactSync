@@ -13,7 +13,7 @@ namespace Narazaka.VRChat.ContactSync
 
         public string EffectiveTagBase(ContactSyncTagGroup group)
         {
-            var fullTagName = $"{group.Name}{group.Token}{TagName}";
+            var fullTagName = $"CST{group.Name}{group.Token}{TagName}";
             return group.EncryptTag ? CryptoUtil.Hash(fullTagName) : fullTagName;
         }
     }
