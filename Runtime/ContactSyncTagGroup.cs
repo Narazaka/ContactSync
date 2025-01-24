@@ -10,6 +10,8 @@ namespace Narazaka.VRChat.ContactSync
     {
         // ここにある情報が一致すれば疎通可能（ランタイム変更可能なキー以外）
         [SerializeField]
+        public int Version = 1;
+        [SerializeField]
         public string Name;
         [SerializeField]
         public string Token;
