@@ -16,6 +16,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
             InPhase(BuildPhase.Generating).BeforePlugin("nadena.dev.modular-avatar").Run("ContactSync", (ctx) =>
             {
                 var assigns = ctx.AvatarRootTransform.GetComponentsInChildren<ContactSyncAssign>();
+                if (assigns.Length == 0) return;
 
                 /*
                 var uniqueNames = new List<string>(assigns.Length);
