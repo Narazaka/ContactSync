@@ -29,6 +29,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
             {
                 motion = clip,
                 threshold = threshold,
+                timeScale = 1,
             };
             var children = blendTree.children;
             ArrayUtility.Add(ref children, child);

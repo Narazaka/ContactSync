@@ -105,7 +105,7 @@ namespace Narazaka.VRChat.ContactSync.Editor
             var driver = System.Array.Find(behaviours, b => b is VRCAvatarParameterDriver) as VRCAvatarParameterDriver;
             if (driver == null)
             {
-                driver = new VRCAvatarParameterDriver();
+                driver = ScriptableObject.CreateInstance<VRCAvatarParameterDriver>();
                 ArrayUtility.Add(ref behaviours, driver);
                 State.behaviours = behaviours;
             }
