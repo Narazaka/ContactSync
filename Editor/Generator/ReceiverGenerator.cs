@@ -116,7 +116,7 @@ namespace Narazaka.VRChat.ContactSync.Editor.Generator
                 var contact = GenerateBaseContact(Name(nameof(Contact)));
                 contact.receiverType = ContactReceiver.ReceiverType.Proximity;
                 contact.parameter = ParameterName.Contact;
-                contact.gameObject.SetActive(false);
+                contact.gameObject.SetActive(true); // If the initial state is false and it is immediately set to true by animation, the initial contact value becomes 0 (VRC bug).
                 return contact.gameObject;
             }
 
