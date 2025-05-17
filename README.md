@@ -17,7 +17,9 @@ https://github.com/Narazaka/ContactSync/releases/latest から `net.narazaka.vrc
 2. VCCでSettings→Packages→Installed Repositoriesの一覧中で「Narazaka VPM Listing」にチェックが付いていることを確認します。
 3. アバタープロジェクトの「Manage Project」から「Contact Sync」をインストールします。
 
-## 使い方
+## ドキュメント
+
+**[ドキュメント](https://contact-sync.vrchat.narazaka.net)**
 
 ## 更新履歴
 
