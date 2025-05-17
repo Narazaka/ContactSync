@@ -2,7 +2,7 @@
   "name": "net.narazaka.vrchat.contact-sync",
   "version": "0.1.0-alpha.8",
   "displayName": "Contact Sync",
-  "description": "Sync avatar parameters with contacts",
+  "description": "Synchronize avatar parameters with other players",
   "author": {
     "name": "Narazaka",
     "url": "https://github.com/Narazaka"
