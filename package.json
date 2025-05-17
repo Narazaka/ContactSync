@@ -1,6 +1,6 @@
 {
   "name": "net.narazaka.vrchat.contact-sync",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-beta.0",
   "displayName": "Contact Sync",
   "description": "Synchronize avatar parameters with other players",
   "author": {
