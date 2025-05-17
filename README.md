@@ -2,7 +2,7 @@
 
 ## 概要
 
-Sync avatar parameters with contacts
+Synchronize avatar parameters with other players
 
 ## インストール
 
