@@ -15,13 +15,15 @@ hero:
       icon: open-book
 ---
 
-import { Card } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-<Card title="柔軟性の高い同期設定が可能">
-ベースの同期設定と具体的なアバターパラメーターへの割り当てを分割することで、別のアバターやメッシュにも柔軟に対応可能。
-</Card>
+<CardGrid>
+  <Card title="柔軟性の高い同期設定が可能">
+  ベースの同期設定と具体的なアバターパラメーターへの割り当てを分割することで、別のアバターやメッシュにも柔軟に対応可能。
+  </Card>
 
-<Card title="多様なユースケースのサポート">
-- 2人で互いに相手を操作する
-- 不特定多数が同じ同期設定を使って、キーベースでマッチングする
-</Card>
+  <Card title="多様なユースケースのサポート">
+  - 2人で互いに相手を操作する
+  - 不特定多数が同じ同期設定を使って、キーベースでマッチングする
+  </Card>
+</CardGrid>
