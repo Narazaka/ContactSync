@@ -36,9 +36,9 @@ namespace Narazaka.VRChat.ContactSync.Editor
 
         static class T
         {
-            public static istring InitialEnabled => new("Initial Enabled", "‰ŠúON");
-            public static istring Saved => new("Saved", "•Û‘¶‚·‚é");
-            public static istring Menu => new("Menu", "ƒƒjƒ…[");
+            public static istring InitialEnabled => new("Initial Enabled", "åˆæœŸON");
+            public static istring Saved => new("Saved", "ä¿å­˜ã™ã‚‹");
+            public static istring Menu => new("Menu", "ãƒ¡ãƒ‹ãƒ¥ãƒ¼");
         }
     }
 }
