@@ -34,7 +34,7 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Guides',
-					autogenerate: { directory: 'guides' },
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 			],
 			locales: {
