@@ -23,6 +23,10 @@ https://github.com/Narazaka/ContactSync/releases/latest から `net.narazaka.vrc
 
 ## 更新履歴
 
+- 0.1.0-beta.1
+  - 文字コード修正
+  - doc url
+
 ## License
 
 [Zlib License](LICENSE.txt)
